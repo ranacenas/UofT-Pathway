@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 import requests
 from decouple import config
-from settings import *
+from settings.py import *
 #
 
 class CourseForm(forms.Form):
