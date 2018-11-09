@@ -2,9 +2,8 @@ from django import forms
 from django.conf import settings
 import requests
 from decouple import config
-from settings.py import *
-#
 
+API_KEY = config("API_KEY")
 class CourseForm(forms.Form):
     course = forms.CharField(max_length=10)
 
