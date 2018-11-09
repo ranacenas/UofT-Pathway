@@ -91,86 +91,85 @@
     </div>
 
         
-</div>
         
             
 
 
 
-<div class="container-fluid">
-    <h2>{{nest.code}}</h2>
-    <ul class="tree">
-        <li> {{nest.prerequisites.prerequisites_zero}} 
-            <ul>
-                {% for key, val in nest.P2_all.items%}
-                    {% for i, k in nest.P2_zip_list.items %}
-                        {% if key == i %}
-                <li>
-                        <h4 class="Init">{{key}}</h4>
-                        <ul>
-                            <div class="div1">
-                            <li>
-                                <h6>{{val}}</h6>
-                                <ul>
-                                    {% for key1, pre1 in nest.P3_dict.items %}
-                                            {% if key1 in k %}
-                                                <li>
-                                                    <a class="Init2">{{key1}} </a>
-                                                    <ul>                                                        
-                                                        <li class='div2'>
-                                                        {{pre1}}
-                                                            
-                                                        </li>
-                                                    </ul>
-                                                
-                                                </li>
-                                                
-                                            {% endif %}
-                                        {% endfor %}
-                                </ul>
+    <div class="container-fluid">
+        <h2>{{nest.code}}</h2>
+        <ul class="tree">
+            <li> {{nest.prerequisites.prerequisites_zero}} 
+                <ul>
+                    {% for key, val in nest.P2_all.items%}
+                        {% for i, k in nest.P2_zip_list.items %}
+                            {% if key == i %}
+                    <li>
+                            <h4 class="Init">{{key}}</h4>
+                            <ul>
+                                <div class="div1">
+                                <li>
+                                    <h6>{{val}}</h6>
+                                    <ul>
+                                        {% for key1, pre1 in nest.P3_dict.items %}
+                                                {% if key1 in k %}
+                                                    <li>
+                                                        <a class="Init2">{{key1}} </a>
+                                                        <ul>                                                        
+                                                            <li class='div2'>
+                                                            {{pre1}}
+                                                                
+                                                            </li>
+                                                        </ul>
+                                                    
+                                                    </li>
+                                                    
+                                                {% endif %}
+                                            {% endfor %}
+                                    </ul>
 
-                            </li>
-                            
-                        </ul>
-                </li>
-                    {% endif %}
+                                </li>
+                                
+                            </ul>
+                    </li>
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-            </ul>
-        </li>
-    </ul>
-</div>
-
-    
-
-<footer style="background-color:rgb(10, 39, 92)" class="footer font-small pt-4">
-    <div class="container text-center md-center">
-        <div class="row">
-            <div class="col-8 mt-md-0 mt-2">
-                <h5 style="color:rgb(255, 255, 255)">About</h5>
-                <p style="color:rgb(255, 255, 255)">This webapp was developed Randell Acenas using Python and Django Framework. This was made possible by StackOverflow, Google, and more importantly the UofT Cobalt API and its contributors. Without it, this would have been much more difficult to develop.</p>
-            </div>
-            <div class="col-4 mb-md-0 mb-2">
-                <h5 style="color:rgb(255, 255, 255)">Links</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a style="color:rgb(255, 255, 255)" href=https://randell.herokuapp.com>Randell's site</a>
-                    </li>
-                    <li>
-                        <a style="color:rgb(255, 255, 255)" href=https://cobalt.qas.im>Cobalt API</a>
-                    </li>
-                    <li>
-                        <a style="color:rgb(255, 255, 255)" href="mailto:randell.acenas@mail.utoronto.ca" target="_top">Contact Me</a>
-                    </li>
-
-
                 </ul>
+            </li>
+        </ul>
+    </div>
 
+        
+
+    <footer style="background-color:rgb(10, 39, 92)" class="footer font-small pt-4">
+        <div class="container text-center md-center">
+            <div class="row">
+                <div class="col-8 mt-md-0 mt-2">
+                    <h5 style="color:rgb(255, 255, 255)">About</h5>
+                    <p style="color:rgb(255, 255, 255)">This webapp was developed Randell Acenas using Python and Django Framework. This was made possible by StackOverflow, Google, and more importantly the UofT Cobalt API and its contributors. Without it, this would have been much more difficult to develop.</p>
+                </div>
+                <div class="col-4 mb-md-0 mb-2">
+                    <h5 style="color:rgb(255, 255, 255)">Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a style="color:rgb(255, 255, 255)" href=https://randell.herokuapp.com>Randell's site</a>
+                        </li>
+                        <li>
+                            <a style="color:rgb(255, 255, 255)" href=https://cobalt.qas.im>Cobalt API</a>
+                        </li>
+                        <li>
+                            <a style="color:rgb(255, 255, 255)" href="mailto:randell.acenas@mail.utoronto.ca" target="_top">Contact Me</a>
+                        </li>
+
+
+                    </ul>
+
+                </div>
             </div>
         </div>
-    </div>
-</footer>
-
+    </footer>
+</div>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
