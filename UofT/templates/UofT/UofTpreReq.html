@@ -7,6 +7,15 @@
     
 </head>
     <style>
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(5, 77, 172);
+    color: rgb(24, 23, 94);
+    text-align: center;
+}
 .tree,
 .tree ul {
   margin:0 0 0 1em; /* indentation */
@@ -61,9 +70,9 @@
 
     </style>
 <body>
-<div class="container">
+<div  class="container-fluid">
 
-    <div class="p-3 mb-2 bg-primary text-white"> 
+    <div style="background-color:rgb(10, 39, 92)" class="p-3 mb-2 text-white"> 
         <div class="media">
             <div class="media-body">
                 <h1> UofT Prerequisite Tool</h1>
@@ -134,24 +143,24 @@
 </div>
     
 
-<footer class="page-footer font-small bg-primary pt-4">
-    <div class="container-fluid text-center md-left">
+<footer style="background-color:rgb(10, 39, 92)" class="footer font-small pt-4">
+    <div class="container text-center md-center">
         <div class="row">
-            <div class="col-md-6 mt-md-0 mt-3">
-                <h5>About</h5>
-                <p>This webapp was developed Randell Acenas using Python and Django Framework. This was made possible by StackOverflow, Google, and more importantly the UofT Cobalt API and its contributors. Without it, this would have been much more difficult to develop.</p>
+            <div class="col-8 mt-md-0 mt-2">
+                <h5 style="color:rgb(255, 255, 255)">About</h5>
+                <p style="color:rgb(255, 255, 255)">This webapp was developed Randell Acenas using Python and Django Framework. This was made possible by StackOverflow, Google, and more importantly the UofT Cobalt API and its contributors. Without it, this would have been much more difficult to develop.</p>
             </div>
-            <div class="col-md-3 mb-md-0 mb-3">
-                <h5>Links</h5>
+            <div class="col-4 mb-md-0 mb-2">
+                <h5 style="color:rgb(255, 255, 255)">Links</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href=randell.herokuapp.com>Randell's site</a>
+                        <a style="color:rgb(255, 255, 255)" href=https://randell.herokuapp.com>Randell's site</a>
                     </li>
                     <li>
-                        <a href=https://cobalt.qas.im>Cobalt API</a>
+                        <a style="color:rgb(255, 255, 255)" href=https://cobalt.qas.im>Cobalt API</a>
                     </li>
                     <li>
-                        <a href="mailto:randell.acenas@mail.utoronto.ca" target="_top">Contact Me</a>
+                        <a style="color:rgb(255, 255, 255)" href="mailto:randell.acenas@mail.utoronto.ca" target="_top">Contact Me</a>
                     </li>
 
 
