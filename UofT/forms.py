@@ -2,8 +2,9 @@ from django import forms
 from django.conf import settings
 import requests
 from decouple import config
+from settings import *
 #
-API_KEY = ''
+
 class CourseForm(forms.Form):
     course = forms.CharField(max_length=10)
 
@@ -46,8 +47,8 @@ class CourseForm(forms.Form):
     
     def second_search(self):
       
-      url = """https://cobalt.qas.im/api/1.0/courses/filter?q=term:"{term}"%20AND%20code:"{code}"%20&key=pXPTlDIC0g3emlvuoZgYERUcMqclp2ip"""
-      urlfinal = url.format(code= self, term = 2018 )
+      url = """https://cobalt.qas.im/api/1.0/courses/filter?q=term:"{term}"%20AND%20code:"{code}"%20&key={key}"""
+      urlfinal = url.format(code= self, term = 2018, key = API_KEY)
       response = requests.get(urlfinal)
       result_preq = response.json()
       if len(result_preq) == 0:
@@ -67,8 +68,8 @@ class CourseForm(forms.Form):
 
     def search(self):
       course = self.cleaned_data['course']
-      url = """https://cobalt.qas.im/api/1.0/courses/filter?q=term:"{term}"%20AND%20code:"{code}"%20&key=pXPTlDIC0g3emlvuoZgYERUcMqclp2ip"""
-      urlfinal = url.format(code= course, term = 2018)
+      url = """https://cobalt.qas.im/api/1.0/courses/filter?q=term:"{term}"%20AND%20code:"{code}"%20&key={key}"""
+      urlfinal = url.format(code= course, term = 2018, key = API_KEY)
       response = requests.get(urlfinal)
       result = response.json()
 
