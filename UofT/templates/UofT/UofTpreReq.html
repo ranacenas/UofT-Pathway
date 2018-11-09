@@ -1,0 +1,167 @@
+
+<!DOCTYPE html> 
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>UofT Prerequisite Tool</title>
+    
+</head>
+    <style>
+.tree,
+.tree ul {
+  margin:0 0 0 1em; /* indentation */
+  padding:0;
+  list-style:none;
+  color:rgb(13, 44, 75);
+  position:relative;
+}
+
+.tree ul {margin-left:.5em} /* (indentation/2) */
+
+.tree:before,
+.tree ul:before {
+  content:"";
+  display:block;
+  width:0;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  border-left:1px solid;
+}
+
+.tree li {
+  margin:0;
+  padding:0 1.5em; /* indentation + .5em */
+  line-height:2em; /* default list item's `line-height` */
+  font-weight:bold;
+  position:relative;
+}
+
+.tree li:before {
+  content:"";
+  display:block;
+  width:10px; /* same with indentation */
+  height:0;
+  border-top:1px solid;
+  margin-top:-1px; /* border top width */
+  position:absolute;
+  top:1em; /* (line-height/2) */
+  left:0;
+}
+
+.tree li:last-child:before {
+  background:rgb(255, 255, 255); /* same with body background */
+  height:auto;
+  top:1em; /* (line-height/2) */
+  bottom:0;
+}
+
+
+
+    </style>
+<body>
+<div class="container">
+
+    <div class="p-3 mb-2 bg-primary text-white"> 
+        <div class="media">
+            <div class="media-body">
+                <h1> UofT Prerequisite Tool</h1>
+                <h6>Enter the course code and find its prerequisites </h6>
+            
+                <form class="form-inline" method="GET">
+                    <div class="form-group">
+                        {{ form }}
+                        <button class="btn btn-default" type="submit">Search</button>
+                    </form>
+                </form>
+            </div>
+
+        </div> 
+    
+    </div>
+
+        
+</div>
+        
+            
+
+
+
+<div class="container">
+    <h2>{{nest.code}}</h2>
+    <ul class="tree">
+        <li> {{nest.prerequisites.prerequisites_zero}} 
+            <ul>
+                {% for key, val in nest.P2_all.items%}
+                    {% for i, k in nest.P2_zip_list.items %}
+                        {% if key == i %}
+                <li>
+                        <h4 class="Init">{{key}}</h4>
+                        <ul>
+                            <div class="div1">
+                            <li>
+                                <h6>{{val}}</h6>
+                                <ul>
+                                    {% for key1, pre1 in nest.P3_dict.items %}
+                                            {% if key1 in k %}
+                                                <li>
+                                                    <a class="Init2">{{key1}} </a>
+                                                    <ul>                                                        
+                                                        <li class='div2'>
+                                                        {{pre1}}
+                                                            
+                                                        </li>
+                                                    </ul>
+                                                
+                                                </li>
+                                                
+                                            {% endif %}
+                                        {% endfor %}
+                                </ul>
+
+                            </li>
+                            
+                        </ul>
+                </li>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        </li>
+    </ul>
+</div>
+</div>
+    
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            $("h4").click(function(){
+                var pare=$(this).parent();
+                $(".div1", pare).each(function(){
+                    $(this).toggle();
+                });
+             
+            });
+        });
+
+        $(document).ready(function(){
+            $(".Init2").click(function(){
+                var pare=$(this).parent();
+                $(".div2", pare).each(function(){
+                    $(this).toggle();
+                });
+             
+            });
+        });
+        </script>
+
+</body>
+
+</html>
