@@ -47,7 +47,7 @@ class CourseForm(forms.Form):
     def second_search(self):
       
       url = """https://cobalt.qas.im/api/1.0/courses/filter?q=term:"{term}"%20AND%20code:"{code}"%20&key={key}"""
-      urlfinal = url.format(code= self, term = 2018, key = config('key'))
+      urlfinal = url.format(code= self, term = 2018, key = API_KEY)
       response = requests.get(urlfinal)
       result_preq = response.json()
       if len(result_preq) == 0:
@@ -68,7 +68,7 @@ class CourseForm(forms.Form):
     def search(self):
       course = self.cleaned_data['course']
       url = """https://cobalt.qas.im/api/1.0/courses/filter?q=term:"{term}"%20AND%20code:"{code}"%20&key={key}"""
-      urlfinal = url.format(code= course, term = 2018, key = config('key'))
+      urlfinal = url.format(code= course, term = 2018, key = API_KEY)
       response = requests.get(urlfinal)
       result = response.json()
 
