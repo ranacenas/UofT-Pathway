@@ -17,7 +17,7 @@ class CourseForm(forms.Form):
       (see below)
       
       catch_rel(['Completion', 'of', 'BIO325H1F']
-      => ['BIO325H1F'] """"
+      => ['BIO325H1F'] """
       Codes = ['H1', 'H3', 'H5', 'Y']
       catch = []
       for course in self:
