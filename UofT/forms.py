@@ -80,49 +80,7 @@ class CourseForm(forms.Form):
 #       A LEVEL PREREQUISITE
       else:
           Level_one = result[0]
-          # Level_one_course = Level_one['code']
-          # L1_prereq = Level_one["prerequisites"] #returns prerequisite of a course
           
-
-          # if len(L1_prereq) == 0:
-          #   L1_prereq = "No Prerequisites for this course"
-          
-          # # if "Any" or "Credits" or "Grade" in L1_prereq:
-          # #   L1_prereq = "L1_prere222q"
-
-          # else:
-          #   L1_prereq_stage_2 = CourseForm.check(L1_prereq)
-          #   Level_One_Req = []
-            
-          #   for i in L1_prereq_stage_2:
-          #     urlsec = url.format(code=i)
-          #     Level_One_Req.append(urlsec)
-          #     Level_one_Res = []
-          #     for req in Level_One_Req:
-          #       resp = requests.get(req)
-          #       result_sec = resp.json()
-          #       secondary = result_sec[0]
-          #       secondary = secondary["prerequisites"]
-          #       Level_one_Res.append(secondary)
-
-
-                       
-
-            # if "or" in L1_prereq_step_two:
-            #   ONLY_OR = [crs_code for crs_code in L1_prereq_step_two if crs_code != "or"]
-            #   Level_one_requests = []
-         
-            #   for i in ONLY_OR:
-            #     urlsec = url.format(code= i)
-            #     Level_one_requests.append(urlsec)
-            #     # Level_one_pre = []
-            #     # for req in Level_one_requests:
-            #     #   resp2 = requests.get(req)
-            #     #   result_sec = resp2.json()
-            #     #   ffinal_sec = result_sec[0]
-            #     #   tes = ffinal_sec["code"]
-            #     #   final_sec = ffinal_sec["prerequisites"]
-            #     #   Level_one_pre.append(final_sec)
       return Level_one
 
 
