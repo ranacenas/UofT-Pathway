@@ -149,10 +149,11 @@ flex: 1 0 auto;
                 </button>
                 <div class="dropdown-menu" style="width: 400px;" >
                     <h6 class="dropdown-header">Current Issues</h6>
-                    <p>Currently, some 4th year level courses especially Rotman courses aren't responding very well therefore some prerequisites fail to load. </p>
+                    <p>Currently, some 4th year level courses especially Rotman courses aren't responding very well therefore some prerequisites fail to load. In addition
+                        CSC423H5 is currently displaying incorrect prerequisites due to the API returning the initial prerequisites without the "CSC". Therefore the program searches and grabs the wrong course code</p>
 
                     <p class="mb-1">
-                    This tool so far is limited to 3 "layers" meaning that a fourth year course will only display up to a second year's prerequisites
+                    This tool so far is now limited to 4 "layers". The more layers there are the slower the site loads.
                     </p>
                 </div>
             </div>
@@ -219,20 +220,46 @@ flex: 1 0 auto;
                                     <h6>{{val}}</h6>
                                     <ul>
                                         {% for key1, pre1 in nest.P3_dict.items %}
+                                        
                                                 {% if key1 in k %}
                                                     <li>
                                                         <a class="Init2">{{key1}} </a>
-                                                        <ul>                                                        
+                                                        <ul>  
+                                                                                                                  
                                                             <li class='div2'>
                                                             {{pre1}}
+                                                            
+                                                                <ul>
+                                                                
+                                                                    
+                                                                    {% for over, under in nest.P3_I.items %}
+                                                                        {% if key1 == over %}
+                                                                        {% for key2, val2 in nest.P4_dict.items %}
+                                                                            {% if key2 in under %}
+                                                                        <li>
+                                                                            {{key2}}
+                                                                            <ul>
+                                                                                <li>
+                                                                                    {{val2}}
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                        {% endif %}
+                                                                    {% endfor%}
+                                                                    
+                                                                </ul>
                                                                 
                                                             </li>
+                                                            
                                                         </ul>
                                                     
                                                     </li>
                                                     
                                                 {% endif %}
-                                            {% endfor %}
+                                                
+                                        {% endfor %}
                                     </ul>
 
                                 </li>
@@ -248,8 +275,6 @@ flex: 1 0 auto;
     </div>
 
         
-
-    
 
 
 

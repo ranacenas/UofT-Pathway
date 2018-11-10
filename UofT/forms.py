@@ -49,6 +49,8 @@ class CourseForm(forms.Form):
       strip_charac = [s.strip(")/") for s in strip_charac]
       strip_charac = [s.strip(",") for s in strip_charac]
       strip_charac = [s.strip(";") for s in strip_charac]
+      strip_charac = [s.strip("(70%") for s in strip_charac]
+
       L1_pre = strip_charac
       Session = ['S', 'F', 'F2']
       for i in Session:

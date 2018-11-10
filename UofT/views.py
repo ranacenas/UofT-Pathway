@@ -38,6 +38,7 @@ def index(request):
                         P2_list = [] #Once the loop finishes, it returns a list of lists with the prerequisites split.
                         P2_all = [] #returns a list of lists of the prerequisites - unsplit
                         
+#=========================== second layer ==============================================================================================                
                         for course in P1:
                             P2_search = CourseForm.second_search(course) #searches each course code in P1
                             P2_pre = CourseForm.PRQ(P2_search) #Takes the prerequisites if they exist. Returns a long string
@@ -58,8 +59,8 @@ def index(request):
                                 nest['P2_zip_list'] = P2_zip
                                 pass
                             pass
-                            
-                        P3_list = []
+#=================================== third layer ========================================================================================================                            
+                        P3_list = [] #same as P2_list
                         for num in range(len(P2_list)): #P2 list is multidimensional 
                             P3_catch = CourseForm.catch_rel(P2_list[num]) #filters out P2 list to ensure only course codes are in the new list
                             L = [x for x in P3_catch if CourseForm.PRQ(CourseForm.second_search(x)) != 'none'] #checks if prerequisites exist
@@ -69,11 +70,18 @@ def index(request):
                             
         
                         P3_final = [[] for items in range(len(P3_list))] #multidimensional list depending on the dimensions of P3_list
+                        P3_Split_final = [[] for items in range(len(P3_list))]
+                        P3_to_P4 = [[] for items in range(len(P3_list))]
                         for i in range(len(P3_list)):
                             for q in P3_list[i]:
                                 P3_search = CourseForm.second_search(q) 
                                 if P3_search != 'none': 
                                     P3_Pre = P3_search["prerequisites"]
+                                    P3_check = CourseForm.check(P3_Pre)
+                                    P3_to_P4.append(P3_check)
+                                    nest['P3_to_P4'] = P3_to_P4
+                                    P3_Split_final[i].append(P3_check)
+                                    nest['P3_split_final'] = P3_Split_final
                                 
                                     
                                     P3_final[i].append(P3_Pre) #appends to corresponding list in the index <- did I use the right terms here?
@@ -82,9 +90,12 @@ def index(request):
                                 
 
                         P3_dict = {}          
+                        P3_split_dict = {}
                         for i in range(len(P3_final)):
                             P3_dict.update(dict(zip(P3_list[i], P3_final[i]))) #Update = removes duplicates = bad. Taken care of below
+                            P3_split_dict.update(dict(zip(P3_list[i], P3_Split_final[i])))
                             nest["P3_dict"] = P3_dict
+                            nest["P3_I"] = P3_split_dict
                             continue
                         for j, k in P2_zip.items():
                             for i in k:
@@ -93,6 +104,37 @@ def index(request):
                                         nest['TEST'][j][i] = p
                                     else:
                                         pass
+# ===================================== fourth layer =================================================================================================
+                        P4_list = []
+                        for num in range(len(P3_to_P4)): #P2 list is multidimensional 
+                            P4_catch = CourseForm.catch_rel(P3_to_P4[num]) #filters out P2 list to ensure only course codes are in the new list
+                            
+                            L = [x for x in P4_catch if CourseForm.PRQ(CourseForm.second_search(x)) != 'none'] #checks if prerequisites exist
+                            P4_list.append(L)
+                            nest['P4_list'] = P4_list #multidimensional list
+                            pass
+                        
+                        P4_final = [[] for items in range(len(P4_list))] #multidimensional list depending on the dimensions of P3_list
+                        P4_Split_final = [[] for items in range(len(P4_list))]
+                        for i in range(len(P4_list)):
+                            for q in P4_list[i]:
+                                P4_search = CourseForm.second_search(q) 
+                                if P4_search != 'none': 
+                                    P4_Pre = P4_search["prerequisites"]
+                                    P4_check = CourseForm.check(P4_Pre)
+                                    P4_Split_final.append(P4_check)
+                                    nest['P4_split_final'] = P4_Split_final
+                                
+                                    
+                                    P4_final[i].append(P4_Pre) #appends to corresponding list in the index <- did I use the right terms here?
+                                    nest['P4_final'] = P4_final
+                                    pass
+                        P4_dict = {}          
+                        for i in range(len(P4_final)):
+                            P4_dict.update(dict(zip(P4_list[i], P4_final[i]))) #Update = removes duplicates = bad. Taken care of below
+                            nest["P4_dict"] = P4_dict
+                            pass
+
                                      
     else:
         form = CourseForm() #if invalid, it reverts back here. important.
