@@ -9,6 +9,9 @@ requests = "*"
 django-heroku = "*"
 gunicorn = "*"
 python-decouple = "*"
+"psycopg2-binary" = "*"
+dj-database-url = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 

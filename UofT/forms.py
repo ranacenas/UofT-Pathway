@@ -2,12 +2,51 @@ from django import forms
 from django.conf import settings
 import requests
 from decouple import config
+import psycopg2
+#from config1 import config2
+from .models import Course
+import os
+import string 
+from django.core.validators import MinLengthValidator
 
 #API Key
 API_KEY = config("API_KEY")
 
 class CourseForm(forms.Form):
-    course = forms.CharField(max_length=10)
+    course = forms.CharField(max_length=8, validators=[MinLengthValidator(8)])
+    
+
+    #params = config2()
+    def search(self):
+      """User inputs a course code and returns a dictionary"""
+      course = self.cleaned_data['course']
+      
+      return course
+
+    def c(self):
+      db1 = config('NAME')
+      user = config('USER')
+      pw = config('PASSWORD')
+      host = config('HOST')
+      port = config('PORT')
+      conn = psycopg2.connect(dbname = db1, user = user, password = pw, host = host, port=port)
+
+      # DATABASE_URL = os.environ['DATABASE_URL']
+      # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+      cur = conn.cursor()
+      sql = """SELECT info from prereqjson where info ->> 'code' ilike '{code}'"""
+      new = sql.format(code=self)
+      cur.execute(new)
+      y = (cur.fetchone())
+      cur.close()
+      
+      #you = [list(i) for i in y]
+      return y
+      
+
+
+    
 
     def catch_rel(self):
       """type(self) = list
@@ -19,25 +58,30 @@ class CourseForm(forms.Form):
       catch_rel(['Completion', 'of', 'BIO325H1F']
       => ['BIO325H1F'] """
       Codes = ['H1', 'H3', 'H5', 'Y']
-      catch = []
-      for course in self:
-          for code in Codes:
-            if code in course:
-              catch.append(course)
-            else:
-              pass
+      
+      # for course in self:
+      #     for code in Codes:
+      #       if code in course:
+      #         catch.append(course)
+      #       else:
+      #         pass
+      catch = [course for code in Codes for course in self if code in course]
       return catch
 
 
 
     
     def check(self):
-      """type(self) = list
+      """type(self) = str
       generates a new list
       
       check(['MATA36H3F and BIOA01H3F', 'Completion of CSC411H1F/CSC404H1F'])
       => ['MATA36H3', 'BIOA01H3', 'CSC411H1', 'CSC404H1F']"""
+      
       L1_pre = self.replace("/", " ").split()
+      # stripchars = ['[](),;']
+      # for c in stripchars:
+      #   s = L1_pre.replace(c, " ")
       strip_and = [code for code in L1_pre if code != "and"]
       strip_or = [code for code in strip_and if code != "or"]
       strip_charac = [s.strip("[") for s in strip_or]
@@ -50,31 +94,27 @@ class CourseForm(forms.Form):
       strip_charac = [s.strip(",") for s in strip_charac]
       strip_charac = [s.strip(";") for s in strip_charac]
       strip_charac = [s.strip("(70%") for s in strip_charac]
+      
 
       L1_pre = strip_charac
-      Session = ['S', 'F', 'F2']
-      for i in Session:
-        if i in L1_pre[:-1]:
-          [x[:-1] for x in L1_pre]
-        else:
-          continue
+      
       return L1_pre
     
-    def second_search(self):
-      """type(self) = string 
-      returns a dictionary
+    # def second_search(self):
+    #   """type(self) = string 
+    #   returns a dictionary
       
-      searches the course code and returns a dictionary"""
+    #   searches the course code and returns a dictionary"""
       
-      url = """https://cobalt.qas.im/api/1.0/courses/filter?q=term:"{term}"%20AND%20code:"{code}"%20&key={key}"""
-      urlfinal = url.format(code= self, term = 2018, key = API_KEY)
-      response = requests.get(urlfinal)
-      result_preq = response.json()
-      if len(result_preq) == 0:
-        result_preq = "none"
-      else:
-        result_preq = result_preq[0]
-      return result_preq
+    #   url = """https://cobalt.qas.im/api/1.0/courses/filter?q=term:"{term}"%20AND%20code:"{code}"%20&key={key}"""
+    #   urlfinal = url.format(code= self, term = 2018, key = API_KEY)
+    #   response = requests.get(urlfinal)
+    #   result_preq = response.json()
+    #   if len(result_preq) == 0:
+    #     result_preq = "none"
+    #   else:
+    #     result_preq = result_preq[0]
+    #   return result_preq
     
     def PRQ(self):
       """type(self) = dictionary
@@ -86,27 +126,14 @@ class CourseForm(forms.Form):
 
       If the dictionary is not empty (meaning the course code exists)
       it takes the prerequisites information from that dictionary and returns a string."""
-      if self != 'none':
+      if self != None:
         PRE = self["prerequisites"]
       else:
         PRE = 'none'
       return PRE
 
 
-    def search(self):
-      """User inputs a course code and returns a dictionary"""
-      course = self.cleaned_data['course']
-      url = """https://cobalt.qas.im/api/1.0/courses/filter?q=term:"{term}"%20AND%20code:"{code}"%20&key={key}"""
-      urlfinal = url.format(code= course, term = 2018, key = API_KEY)
-      response = requests.get(urlfinal) 
-      result = response.json() #returns a dictionary IN a list
-      if len(result) == 0:
-        Level_one = "sorry, try again"
-        pass
-
-      else:
-          Level_one = result[0]  
-      return Level_one
+    
 
 
 class AutoTree(dict):

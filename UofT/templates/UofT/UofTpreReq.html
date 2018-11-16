@@ -190,7 +190,7 @@ flex: 1 0 auto;
             
                 <form class="form-inline" method="GET">
                     <div class="form-group">
-                        {{ form }}
+                        {{ A }}
                         <button class="btn btn-default" type="submit">Search</button>
                     </form>
                 </form>
@@ -200,19 +200,20 @@ flex: 1 0 auto;
     
     </div>
 </div>
-        
-  
+
+{% for i in nest %}
+
 
 
 <!-- Jinja2 code. took me forever -->
     <div class="content p-3">
-        <h2>{{nest.code}}</h2>
+        <h2>{{i.code}}</h2>
         <ul class="tree">
-            <li> {{nest.prerequisites.prerequisites_zero}} 
+            <li> {{i.P1}} 
                 <ul>
-                    {% for key, val in nest.P2_all.items%}
-                        {% for i, k in nest.P2_zip_list.items %}
-                            {% if key == i %}
+                    {% for key, val in i.21.items%}
+                        {% for io, k in i.22.items %}
+                            {% if key == io %}
                     <li>
                             <h4 class="Init">{{key}}</h4>
                             <ul>
@@ -220,7 +221,7 @@ flex: 1 0 auto;
                                 <li>
                                     <h6>{{val}}</h6>
                                     <ul>
-                                        {% for key1, pre1 in nest.P3_dict.items %}
+                                        {% for key1, pre1 in i.P3_dict.items %}
                                         
                                                 {% if key1 in k %}
                                                     <li>
@@ -233,9 +234,9 @@ flex: 1 0 auto;
                                                                 <ul>
                                                                 
                                                                     
-                                                                    {% for over, under in nest.P3_I.items %}
+                                                                    {% for over, under in i.P3_I.items %}
                                                                         {% if key1 == over %}
-                                                                        {% for key2, val2 in nest.P4_dict.items %}
+                                                                        {% for key2, val2 in i.P4_dict.items %}
                                                                             {% if key2 in under %}
                                                                         <li>
                                                                             {{key2}}
@@ -274,7 +275,7 @@ flex: 1 0 auto;
             </li>
         </ul>
     </div>
-
+{% endfor %}
         
 
 
