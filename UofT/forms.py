@@ -24,15 +24,15 @@ class CourseForm(forms.Form):
       return course
 
     def c(self):
-      db1 = config('NAME')
-      user = config('USER')
-      pw = config('PASSWORD')
-      host = config('HOST')
-      port = config('PORT')
-      conn = psycopg2.connect(dbname = db1, user = user, password = pw, host = host, port=port)
+      # db1 = config('NAME')
+      # user = config('USER')
+      # pw = config('PASSWORD')
+      # host = config('HOST')
+      # port = config('PORT')
+      # conn = psycopg2.connect(dbname = db1, user = user, password = pw, host = host, port=port)
 
-      # DATABASE_URL = os.environ['DATABASE_URL']
-      # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+      DATABASE_URL = os.environ['DATABASE_URL']
+      conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
       cur = conn.cursor()
       sql = """SELECT info from prereqjson where info ->> 'code' ilike '{code}'"""
