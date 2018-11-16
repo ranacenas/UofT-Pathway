@@ -127,7 +127,7 @@ flex: 1 0 auto;
                 </button>
                 <div class="dropdown-menu">
                     <h6 class="dropdown-header">About</h6>
-                    <p>This webapp was developed using Python and Django framework with Bootstrap. It utilises the Cobalt API. </p>
+                    <p>This webapp was developed using Python and Django framework with Bootstrap.</p>
                     <a href="https://cobalt.qas.im/"> Cobalt API Docs </a>
                 </div>
             </div>
@@ -137,11 +137,7 @@ flex: 1 0 auto;
                 </button>
                 <div class="dropdown-menu" style="width: 400px;" >
                     <h6 class="dropdown-header">Notes</h6>
-                    <p>Since this utilizes an API, the results may load slower depending on how many requests are made on the API and the amount of "layers" the course comes with. For example: a
-                            fourth year class with a lot of prerequisites will load slower than a fourth year course with only one prerequisite. If there are enough people using this, I will try to learn on how to self-host it or create a database to make things run faster</p>
-                    <p class="mb-0">
-                        If there are courses missing or fail to load, the API may not have that information, the course no longer exists or I just need to improve my code.
-                    </p>
+                    <p>I have now moved over to a database, therefore it should run much faster now. </p>
                 </div>
             </div>
             <div class="btn-group">
@@ -150,11 +146,10 @@ flex: 1 0 auto;
                 </button>
                 <div class="dropdown-menu" style="width: 400px;" >
                     <h6 class="dropdown-header">Current Issues</h6>
-                    <p>Currently, some 4th year level courses especially Rotman courses aren't responding very well therefore some prerequisites fail to load. In addition
-                        CSC423H5 is currently displaying incorrect prerequisites due to the API returning the initial prerequisites without the "CSC". Therefore the program searches and grabs the wrong course code</p>
+                    <p>The scraper did not scrape all of the courses available. In addition, my script was not able to fully import data into the database therefore approximately 5-10% of courses are missing. Working on a fix. </p>
 
                     <p class="mb-1">
-                    This tool so far is now limited to 4 "layers". The more layers there are the slower the site loads.
+                    This tool so far is now limited to 4 "layers".
                     </p>
                 </div>
             </div>
@@ -185,8 +180,8 @@ flex: 1 0 auto;
         <div class="media">
             <div class="media-body">
                 <h1> UofT Prerequisite Tool</h1>
-                <h5>Enter the course code and find its prerequisites.</h5>
-                <a>Note: UTM and UTSG have the same course code scheme, therefore include H1 for UTSG and H5 for UTM at the end of the course code when searching.</a>
+                <h5>Enter the full course code and find its prerequisites.</h5>
+                <a>Note: Please enter the full course code when searching. This means including H1/Y1 for UTSG, H3/Y3 for UTSC, and H5/Y5 for UTM.</a>
             
                 <form class="form-inline" method="GET">
                     <div class="form-group">
