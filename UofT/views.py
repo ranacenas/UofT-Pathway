@@ -6,11 +6,7 @@ import psycopg2
 # Create your views here.
 
 def index(request):
-    db = config('NAME')
-    user = config('USER')
-    pw = config('PASSWORD')
-    host = config('HOST')
-    port = config('PORT')
+    
     nest = AutoTree()
 
     
