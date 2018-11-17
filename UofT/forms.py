@@ -24,6 +24,7 @@ class CourseForm(forms.Form):
       return course
 
     def c(self):
+      #for local dev
       # db1 = config('NAME')
       # user = config('USER')
       # pw = config('PASSWORD')
@@ -31,6 +32,7 @@ class CourseForm(forms.Form):
       # port = config('PORT')
       # conn = psycopg2.connect(dbname = db1, user = user, password = pw, host = host, port=port)
 
+      #heroku dev
       DATABASE_URL = os.environ['DATABASE_URL']
       conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
@@ -59,12 +61,6 @@ class CourseForm(forms.Form):
       => ['BIO325H1F'] """
       Codes = ['H1', 'H3', 'H5', 'Y']
       
-      # for course in self:
-      #     for code in Codes:
-      #       if code in course:
-      #         catch.append(course)
-      #       else:
-      #         pass
       catch = [course for code in Codes for course in self if code in course]
       return catch
 
@@ -99,39 +95,9 @@ class CourseForm(forms.Form):
       L1_pre = strip_charac
       
       return L1_pre
+ 
     
-    # def second_search(self):
-    #   """type(self) = string 
-    #   returns a dictionary
-      
-    #   searches the course code and returns a dictionary"""
-      
-    #   url = """https://cobalt.qas.im/api/1.0/courses/filter?q=term:"{term}"%20AND%20code:"{code}"%20&key={key}"""
-    #   urlfinal = url.format(code= self, term = 2018, key = API_KEY)
-    #   response = requests.get(urlfinal)
-    #   result_preq = response.json()
-    #   if len(result_preq) == 0:
-    #     result_preq = "none"
-    #   else:
-    #     result_preq = result_preq[0]
-    #   return result_preq
-    
-    def PRQ(self):
-      """type(self) = dictionary
-
-      PRQ(dict):
-      returns string
-
-      This function is used after the catch_rel function
-
-      If the dictionary is not empty (meaning the course code exists)
-      it takes the prerequisites information from that dictionary and returns a string."""
-      if self != None:
-        PRE = self["prerequisites"]
-      else:
-        PRE = 'none'
-      return PRE
-
+   
 
     
 
